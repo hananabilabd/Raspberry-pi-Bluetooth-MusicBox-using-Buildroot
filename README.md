@@ -9,17 +9,18 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
  
 - Target Packages --> Audio and Video applications --> aumix, mpg123, pulseaudio.
 - Target Packages --> Libraries --> Audio/Sound 
-  select alsa-lib then select all included in it
+   select alsa-lib then select all included in it
   ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/alsa-lib.png)
-  
-  select bcg729
-  libid3tag
-  libmad
-  architecture-specific optimization
-  libsndfile
-  portaudio --> alsa support
-  C++ binding
-  speex
+- Target Packages --> Libraries --> Audio/Sound 
+   select
+   - bcg729
+   - libid3tag
+   - libmad
+   - architecture-specific optimization
+   - libsndfile
+   - portaudio --> alsa support
+   - C++ binding
+   - speex
   - Append in package/rpi-firmware/config.txt
     dtparam=audio=on
   - To use Shuffle in our MusicBox edit package/busibox/busibox.config
@@ -34,8 +35,10 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
   
 ## Wifi
  - Target packages -> Hardware handling -> Firmware -> rpi-wifi-firmware
- - Target packages -> Networking applications -> ifupdown scripts
+ - Target packages -> Networking applications ->  - ifupdown scripts
+ 
                                                   - openssh
+                                                  
                                                   - wpa_supplicant -> Enable nl80211 support , Enable Autoscan
                                                   
 ## Bluetooth
@@ -45,11 +48,11 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
                              - bluez-utils 5.x (select all items under it)
  - change buildroot/output/images/rpi-firmware/cmdline.txt
   to 
+  
   `root=/dev/mmcblk0p2 rootwait console=serial0,115200 console=tty1 `
                              
 ## Send messages to logges users
- - Target Packages --> system tools --> util-linux --> - wall 
-                                                       - write
+ - Target Packages --> system tools --> util-linux -->  wall, write
                                            
 ## Audio via Bluetooth
 - - Target Packages --> Audio and Video applications --> bluez-alsa (and all under it)
