@@ -12,18 +12,19 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
    select alsa-lib then select all included in it
   ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/alsa-lib.png)
 - Target Packages --> Libraries --> Audio/Sound 
-   select
-   - bcg729
-   - libid3tag
-   - libmad
-   - architecture-specific optimization
-   - libsndfile
-   - portaudio --> alsa support
-   - C++ binding
-   - speex
-  - Append in package/rpi-firmware/config.txt
+
+                                                   select
+                                                   - bcg729
+                                                   - libid3tag
+                                                   - libmad
+                                                   - architecture-specific optimization
+                                                   - libsndfile
+                                                   - portaudio --> alsa support
+                                                   - C++ binding
+                                                   - speex
+ - Append in package/rpi-firmware/config.txt
     dtparam=audio=on
-  - To use Shuffle in our MusicBox edit package/busibox/busibox.config
+ - To use Shuffle in our MusicBox edit package/busibox/busibox.config
     CONFIG_SHUF=y
     
 ## Text to Speech
@@ -35,17 +36,20 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
   
 ## Wifi
  - Target packages -> Hardware handling -> Firmware -> rpi-wifi-firmware
- - Target packages -> Networking applications ->  - ifupdown scripts
+ - Target packages -> Networking applications ->  
  
+                                                  - ifupdown scripts
+                                                  
                                                   - openssh
                                                   
                                                   - wpa_supplicant -> Enable nl80211 support , Enable Autoscan
                                                   
 ## Bluetooth
- - Target packages -> Hardware handling -> Firmware -> rpi-bt-firmware
- - Target packages -> Networking applications -> 
-                             - bluez-tools
-                             - bluez-utils 5.x (select all items under it)
+ - Target packages -> Hardware handling --> Firmware -> rpi-bt-firmware
+ - Target packages -> Networking applications --> 
+ 
+                                               - bluez-tools
+                                               - bluez-utils 5.x (select all items under it)
  - change buildroot/output/images/rpi-firmware/cmdline.txt
   to 
   
