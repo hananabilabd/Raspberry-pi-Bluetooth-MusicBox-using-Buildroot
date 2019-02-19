@@ -67,6 +67,7 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
         exit
 - after that to connect this device just 
   `bt-device -c 5C:0E:8B:03:6E:4E`
+- `aplay -D bluealsa:DEV=74:E5:43:F4:C5:F4,PROFILE=a2dp,HCI=hci0 /root/superMusic/wallada.wav `
 ## Send messages to logges users
  - Target Packages --> system tools --> util-linux -->  wall, write
  - Reference --> [link](https://www.tecmint.com/send-a-message-to-logged-users-in-linux-terminal/)
