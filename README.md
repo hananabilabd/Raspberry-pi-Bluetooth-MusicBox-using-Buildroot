@@ -82,3 +82,4 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 * [Link2 --> bluetooth-on-raspberry-pi-with-buildroot](https://tewarid.github.io/2014/10/29/bluetooth-on-raspberry-pi-with-buildroot.html)
 
 * [Link3 --> Bluez-alsa](https://github.com/Arkq/bluez-alsa)
+* [Link4 --> Raspberry stackExchange](https://raspberrypi.stackexchange.com/questions/90267/how-to-stream-sound-to-a-bluetooth-device-from-a-raspberry-pi-zero)
