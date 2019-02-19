@@ -22,9 +22,9 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
                                                    - portaudio --> alsa support
                                                    - C++ binding
                                                    - speex
- - Append in package/rpi-firmware/config.txt
+- Append in package/rpi-firmware/config.txt
     dtparam=audio=on
- - To use Shuffle in our MusicBox edit package/busibox/busibox.config
+- To use Shuffle in our MusicBox edit package/busibox/busibox.config
     CONFIG_SHUF=y
     
 ## Text to Speech
