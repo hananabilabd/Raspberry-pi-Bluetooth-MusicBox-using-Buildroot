@@ -50,3 +50,11 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 ## Send messages to logges users
  - Target Packages --> system tools --> util-linux --> - wall 
                                                        - write
+                                           
+## Audio via Bluetooth
+- - Target Packages --> Audio and Video applications --> bluez-alsa (and all under it)
+
+** please note that I use these links as a reference
+[Link1](https://www.youtube.com/watch?v=MxKzwvF_eBA)
+[Link2](https://tewarid.github.io/2014/10/29/bluetooth-on-raspberry-pi-with-buildroot.html)
+[Link3 --> Bluez-alsa](https://github.com/Arkq/bluez-alsa)
