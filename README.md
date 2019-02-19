@@ -25,23 +25,25 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
   - To use Shuffle in our MusicBox edit package/busibox/busibox.config
     CONFIG_SHUF=y
     
-  ## Text to Speech
+## Text to Speech
  - Target Packages --> Audio and Video applications --> espeak --> alsa via portaudio (as a backend)
   
-  ## Filesystem Images
+## Filesystem Images
  - This to increase our image so that it can handle the extra package we chose
  - Filesystem images --> exact size --> 300M 
   
-  ## Wifi
+## Wifi
  - Target packages -> Hardware handling -> Firmware -> rpi-wifi-firmware
  - Target packages -> Networking applications -> ifupdown scripts
                                                   - openssh
                                                   - wpa_supplicant -> Enable nl80211 support , Enable Autoscan
-  ## Bluetooth
+                                                  
+## Bluetooth
  - Target packages -> Hardware handling -> Firmware -> rpi-bt-firmware
  - Target packages -> Networking applications -> 
                              - bluez-tools
                              - bluez-utils 5.x (select all items under it)
-  ## Send messages to logges users
+                             
+## Send messages to logges users
  - Target Packages --> system tools --> util-linux --> - wall 
                                                        - write
