@@ -52,9 +52,21 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
                                                - bluez-utils 5.x (select all items under it)
  - change buildroot/output/images/rpi-firmware/cmdline.txt
   to 
-  
   `root=/dev/mmcblk0p2 rootwait console=serial0,115200 console=tty1 `
-                             
+- To connect a device to bluetooth
+                                                                       
+        sudo bluetoothctl
+        power on
+        agent on
+        default-agent
+        scan on
+        [NEW] Device AA:BB:CC:DD:EE:FF XYZ
+        Now I Press the pairing button on the device (disabling bluetooth on any nearby devices)
+        connect AA:BB:CC:DD:EE:FF
+        trust AA:BB:CC:DD:EE:FF
+        exit
+- after that to connect this device just 
+  `bt-device -c 5C:0E:8B:03:6E:4E`
 ## Send messages to logges users
  - Target Packages --> system tools --> util-linux -->  wall, write
  - Reference --> [link](https://www.tecmint.com/send-a-message-to-logged-users-in-linux-terminal/)
