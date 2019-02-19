@@ -57,9 +57,11 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
                              
 ## Send messages to logges users
  - Target Packages --> system tools --> util-linux -->  wall, write
+ - Reference --> [link](https://www.tecmint.com/send-a-message-to-logged-users-in-linux-terminal/)
                                            
 ## Audio via Bluetooth
 - - Target Packages --> Audio and Video applications --> bluez-alsa (and all under it)
+
 
 ### please note that I use these links as a reference
 
