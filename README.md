@@ -43,6 +43,9 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
  - Target packages -> Networking applications -> 
                              - bluez-tools
                              - bluez-utils 5.x (select all items under it)
+ - change buildroot/output/images/rpi-firmware/cmdline.txt
+  to 
+  `root=/dev/mmcblk0p2 rootwait console=serial0,115200 console=tty1 `
                              
 ## Send messages to logges users
  - Target Packages --> system tools --> util-linux --> - wall 
