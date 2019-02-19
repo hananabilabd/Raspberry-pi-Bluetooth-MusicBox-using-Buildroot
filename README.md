@@ -5,11 +5,11 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 - `make menuconfig`  
 - Toolchain --> C library --> glibc
 - Target Packages --> Audio and Video applications --> alsa-utils 
- ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/Images/alsa-utils.png)
+ ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/alsa-utils.png)
 - Target Packages --> Audio and Video applications --> aumix, mpg123, pulseaudio.
 - Target Packages --> Libraries --> Audio/Sound 
   select alsa-lib then select all included in it
-  ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/Images/alsa-lib.png)
+  ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/alsa-lib.png)
   select bcg729
   libid3tag
   libmad
