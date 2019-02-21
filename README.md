@@ -75,7 +75,13 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 ## Audio via Bluetooth
 - - Target Packages --> Audio and Video applications --> bluez-alsa (and all under it)
 
-
+# Usage 
+- to regenerate the project, First download builroot and 
+- copy playmusic folderti `buildroot/board/raspberrypi3-64/`
+- replace post-build.sh in `buildroot/board/raspberrypi3-64/`with post-build.sh from my repository
+- replace raspberrypi3_64_defconfig in `buildroot/configs/`  with the one from my repository
+- `$ make raspberrypi3_64_defconfig`
+- Enjoy
 ### please note that I use these links as a reference
 
 * [Link1](https://www.youtube.com/watch?v=MxKzwvF_eBA)
