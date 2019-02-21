@@ -1,0 +1,6 @@
+#!/bin/sh
+song="/root/superMusic/song0.mp3"
+sudo modprobe snd-bcm2835
+mpg123 "$song"
+killall -KILL mpg123
+

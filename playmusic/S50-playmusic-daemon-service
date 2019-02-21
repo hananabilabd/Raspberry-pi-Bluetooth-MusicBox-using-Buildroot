@@ -1,0 +1,31 @@
+#!/bin/sh
+
+DAEMON1="/root/superMusic/playmusic-daemon"
+DAEMON2="/root/superMusic/detectUSB"
+test -f ${DAEMON1} || exit 0
+test -f ${DAEMON2} || exit 0
+
+startdaemon1(){
+  sudo modprobe snd-bcm2835 #This will wire up the sound card with alsa
+  start-stop-daemon -b --start --quiet --exec ${DAEMON1}
+}
+
+stopdaemon1(){
+  start-stop-daemon --stop --quiet --exec ${DAEMON1}
+}
+startdaemon2(){
+  sudo modprobe snd-bcm2835 #This will wire up the sound card with alsa
+  start-stop-daemon -b --start --quiet --exec ${DAEMON2}
+}
+
+stopdaemon2(){
+  start-stop-daemon --stop --quiet --exec ${DAEMON2}
+}
+/root/superMusic/playmusic
+/root/superMusic/startBluetooth
+startdaemon2
+startdaemon1
+
+
+
+

@@ -1,0 +1,49 @@
+#!/bin/bash
+no_of_songs_system=$(sudo find / -name "*.mp3" | wc -l)
+espeak -g15 -s130 -ven-us+f1 "You have $no_of_songs_system mp3 songs on SD Card of Raspberry pi" 2>/dev/null
+#no_of_songs_media=$(sudo find /media/ -name "*.mp3" | wc -l)
+#espeak -g15 -s130 -ven-us+f1 "You have $no_of_songs_media mp3 songs on External USB " 2>/dev/null 
+counter=0
+search2=0
+USBFlag=0
+if [ ! -f /root/superMusic/somethingChanged.conf ] ; then # check if flag file has created before
+    touch /root/superMusic/somethingChanged.conf
+    chmod 777 /root/superMusic/somethingChanged.conf
+    echo "FLAG=0" > /root/superMusic/somethingChanged.conf
+fi
+while true; do
+sleep 1
+
+search=$(find /dev/ -name sd*)
+   if  [[  -z $search  ]] ; then 
+	echo "no USB Found"
+	if [[  $USBFlag  -eq 1 ]] ; then
+		echo "FLAG=1" >  /root/superMusic/somethingChanged.conf
+		USBFlag=0 
+	fi
+   else #something now is connected
+	if [  "$counter" -eq 1 ] ; then
+        	counter=0
+       		search1=$search
+	else
+       		counter=$[ $counter +1 ]
+        	search2=$search
+	fi
+	if ! [  "$search1" = "$search2"  ] ; then # a change happens  
+     		 partitions="$(fdisk -l /dev/sd* | grep -v 'Unknown' | grep -v 'Empty' | awk '/^\/dev\/sd/ {print $1}')"
+      	    for partition in $partitions; do
+	  	echo $partition
+          	mountpoint="/media/$(basename $partition)"
+          	mkdir -p $mountpoint
+          	mount $partition $mountpoint
+		no_of_songs_media=$(sudo find $mountpoint -name "*.mp3" | wc -l)
+		type="$(fdisk -l /dev/sd* | grep -v 'Unknown' | grep -v 'Empty' | awk '/^\/dev\/sd/ {print $11}')"
+		size="$(fdisk -l /dev/sd* | grep -v 'Unknown' | grep -v 'Empty' | awk '/^\/dev\/sd/ {print $8}')"
+	espeak -g15 -s130 -ven-us+f1 " $no_of_songs_media mp3 songs Found on USB " 2>/dev/null
+        espeak -g15 -s130 -ven-us+f2 "it's type is $type and it's size is $size" 2>/dev/null 
+        echo "FLAG=1" > /root/superMusic/somethingChanged.conf
+	USBFlag=1
+	done
+	fi
+  fi
+done

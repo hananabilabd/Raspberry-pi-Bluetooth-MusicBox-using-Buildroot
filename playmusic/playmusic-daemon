@@ -1,0 +1,119 @@
+#!/bin/bash
+set -e
+#sudo modprobe snd-bcm2835 #This will wire up the sound card with alsa
+PLAYER="/"
+test -d ${PLAYER} || exit 1
+i=0
+curser=0
+button_state=0
+FirstTimeFlag=0
+PlayingFlag=0
+creatingarray(){
+#espeak "hello done entered in creating array success hello hello"
+i=0
+curser=0
+button_state=0
+FirstTimeFlag=0
+PlayingFlag=0
+arr=()
+while IFS= read -r var
+do 
+  i=$[ $i +1 ]
+  arr+=($var)
+done <<< $(find $PLAYER -iname "*mp3") 
+Max=$[$i -1]
+Min=0
+}
+creatingarray
+if [ ! -d /sys/class/gpio/gpio4 ] ; then # check if export process has done before
+    echo "4" > /sys/class/gpio/export
+    echo "in" > /sys/class/gpio/gpio4/direction
+fi
+if [ ! -d /sys/class/gpio/gpio17 ] ; then # check if export process has done before
+    echo "17" > /sys/class/gpio/export
+    echo "in" > /sys/class/gpio/gpio17/direction
+fi
+if [ ! -d /sys/class/gpio/gpio18 ] ; then # check if export process has done before
+    echo "18" > /sys/class/gpio/export
+    echo "in" > /sys/class/gpio/gpio18/direction
+fi
+if [ ! -f  /root/superMusic/somethingChanged.conf ] ; then # check if not exists
+    echo "FLAG=0" > /root/superMusic/somethingChanged.conf
+    chmod 777 /root/superMusic/somethingChanged.conf
+fi
+counter=0
+while true; do
+  counter=$[ $counter +1 ]
+  if [ $counter -gt 800 ] ; then
+	counter=0
+	 if [  $FirstTimeFlag  -eq 0 ] ; then
+		echo  "Nothing is played right now"
+        	#wall "Nothing is played right now" # -n  to suppress
+        elif [ $PlayingFlag -eq 0 ] ; then
+		echo "  ${arr[$curser]} song is now paused"
+                #wall "  ${arr[$curser]} song is now paused"
+        else
+		echo " ${arr[$curser]} song is being played right now"
+                #wall " ${arr[$curser]} song is being played right now"
+        fi
+  fi
+  source /root/superMusic/somethingChanged.conf
+  if [[  $FLAG -eq 1  ]] ; then 
+    echo "something changed"
+    creatingarray
+    echo "FLAG=0" > /root/superMusic/somethingChanged.conf
+  fi
+	if [[ $flag = "1" ]] ; then 
+	espeak " hello entered in the condition of flag"
+	fi 
+  if [ $(cat /sys/class/gpio/gpio4/value) -eq 1 ] ; then #if anyone pushed the button ==> toggle 
+    #toggle button state
+    if [ $FirstTimeFlag -eq 0 ] ; then 
+      mpg123 ${arr[@]:$curser} &
+      FirstTimeFlag=1
+      button_state=1
+      PlayingFlag=1
+      sleep 0.5
+      continue
+    fi
+    if [ $button_state -eq 0 ]
+      then
+      killall -CONT mpg123
+      PlayingFlag=1
+      button_state=1
+      sleep 0.4
+    elif [ $button_state -eq 1 ]
+    then
+      killall -STOP  mpg123
+      PlayingFlag=0
+      button_state=0
+      sleep 0.4 # to allow finger release
+    fi
+  fi
+
+  if [ $(cat /sys/class/gpio/gpio17/value) -eq 1 ] ; then #next
+     if [ $PlayingFlag -eq 1 ] ; then 
+
+      if [ $curser -lt $Max ] ; then 
+        sudo killall -KILL mpg123
+        sleep 0.5
+        curser=$[ $curser +1 ]
+        echo "playing song = $curser"
+        mpg123 ${arr[@]:$curser} &
+        
+      fi
+    fi
+  fi
+  if [ $(cat /sys/class/gpio/gpio18/value) -eq 1 ] ; then #prev
+     if [ $PlayingFlag -eq 1 ] ; then 
+      if [ $curser -gt $Min ] ; then
+        sudo killall -KILL mpg123 
+        sleep 0.5
+        curser=$[ $curser -1 ]
+        echo "playing song = $curser"
+        mpg123 ${arr[@]:$curser} &
+        
+      fi
+    fi
+  fi 
+done
