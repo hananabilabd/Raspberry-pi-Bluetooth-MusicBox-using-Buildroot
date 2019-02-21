@@ -89,11 +89,11 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 
 1. On power-up rpi3, it scans all connected Mass storage devices (sd card, usb, hdd) for MP3 files and output on the speaker the number of mp3 files found 
    * On Power-up it executes script called  S50-playmusic-daemon, this script execute 1 script and 2 daemons .
-   * irst script "/root/superMusic/playmusic" to play a welcome music.
+   * First script "/root/superMusic/playmusic" to play a welcome music.
    * First daemon run script /root/superMusic/detectUSB  this daemon enter an infinite loop to scan if any USB devices has been plugged and mount this USB . 
-    * Second daemon "/root/superMusic/playmusic-daemon"  enter an infinite loop to detect if any button is pressed to play or stop music playlist 
+   * Second daemon "/root/superMusic/playmusic-daemon"  enter an infinite loop to detect if any button is pressed to play or stop music playlist 
 2. There is a flag that is  shared between the 2 daemons so that when detectUSB daemon found a USB and mount it , it raises a flag to playmusic-daemon says that something changed in the system so that playmusic-daemon should search again for all mp3 files and create a new bash array with these new found files  
-  * same thing happens you unplug usb storage device , detectUSB daemon detects Something changed and raise this flag to         playmusic-daemon , so that playmusic daemon can detect that it should refresh the playlist with the new files 
+   * same thing happens you unplug usb storage device , detectUSB daemon detects Something changed and raise this flag to         playmusic-daemon , so that playmusic daemon can detect that it should refresh the playlist with the new files 
 3. If the user plug a USB device , rpi 3 detects it and mounts it on media/sd*/  and rpi output on the speaker number of mp3 files found on this USB device, it's type and it's size 
 4. Music playlist is always all the mp3 files found on the Rpi ( SD card + USB storage)  , this playlist is contollable through 3 buttons previous, pause, play . When user reach the end of the playlist the next button stop working  and the same to the previous button when the first song is being played 
 5. User can control the RPi through wifi or cable   .. I set static ip 192.168.1.201 to the wifi  ,, but it's noticed that rpi can't be set to static ip through wifi and ethernet at the same time 
