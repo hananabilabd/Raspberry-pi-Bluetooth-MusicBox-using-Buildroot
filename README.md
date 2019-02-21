@@ -1,6 +1,8 @@
 # Raspberry-pi-Bluetooth-MusicBox-using-Buildroot
 Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
-
+## Video
+ [Link](https://youtu.be/OiDO2pVhzgk)
+ 
 ## Music Installation
 - `make menuconfig`  
 - Toolchain --> C library --> glibc
@@ -82,7 +84,24 @@ Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
 - replace raspberrypi3_64_defconfig in `buildroot/configs/`  with the one from my repository
 - `$ make raspberrypi3_64_defconfig`
 - Enjoy
-### please note that I use these links as a reference
+# Description 
+
+
+1. On power-up rpi3, it scans all connected Mass storage devices (sd card, usb, hdd) for MP3 files and output on the speaker the number of mp3 files found 
+   * On Power-up it executes script called  S50-playmusic-daemon, this script execute 1 script and 2 daemons .
+   * irst script "/root/superMusic/playmusic" to play a welcome music.
+   * First daemon run script /root/superMusic/detectUSB  this daemon enter an infinite loop to scan if any USB devices has been plugged and mount this USB . 
+    * Second daemon "/root/superMusic/playmusic-daemon"  enter an infinite loop to detect if any button is pressed to play or stop music playlist 
+2. There is a flag that is  shared between the 2 daemons so that when detectUSB daemon found a USB and mount it , it raises a flag to playmusic-daemon says that something changed in the system so that playmusic-daemon should search again for all mp3 files and create a new bash array with these new found files  
+  * same thing happens you unplug usb storage device , detectUSB daemon detects Something changed and raise this flag to         playmusic-daemon , so that playmusic daemon can detect that it should refresh the playlist with the new files 
+3. If the user plug a USB device , rpi 3 detects it and mounts it on media/sd*/  and rpi output on the speaker number of mp3 files found on this USB device, it's type and it's size 
+4. Music playlist is always all the mp3 files found on the Rpi ( SD card + USB storage)  , this playlist is contollable through 3 buttons previous, pause, play . When user reach the end of the playlist the next button stop working  and the same to the previous button when the first song is being played 
+5. User can control the RPi through wifi or cable   .. I set static ip 192.168.1.201 to the wifi  ,, but it's noticed that rpi can't be set to static ip through wifi and ethernet at the same time 
+6. On connecting to Rpi via SSH , Rpi prints the name, status of the mp3 playlist , so it prints either nothing is played when rpi has booted and none pushed play button , song1 is being played , song2 is paused , it prints these on all connected terminals with "wall" command
+7. Rpi is able to play music via bluetooth ( may be it was the toughest task) . I was able to play .wav through bluetooth , but I wasn't able to make the bluetooth as the default rpi speaker (( i tried to create asound.conf to globaly set bluetooth as rpi default speaker but it didn't work, although i think it can be done)) 
+8. The main problem in the bluetooth is that bluez-utils5 has conflicts with alsa in fact they say in bluez-utils5 they remove support to alsa so if you choose bluez-utils5 you have to choose bluez-alsa in addition to run audio bluetooth but if you choose bluez-utils 3 audio support is included in it  ... I worked with bluez-utils5 anyway.
+
+#### please note that I use these links as a reference
 
 * [Link1](https://www.youtube.com/watch?v=MxKzwvF_eBA)
 
