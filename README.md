@@ -1,5 +1,5 @@
 # Raspberry-pi-Bluetooth-MusicBox-using-Buildroot
-Raspberry-pi Bluetooth, WiFi MusicBox using Buildroot
+Raspberry-pi Bluetooth, WiFi, using Buildroot
 ## Video
  [Link](https://youtu.be/OiDO2pVhzgk)
  
