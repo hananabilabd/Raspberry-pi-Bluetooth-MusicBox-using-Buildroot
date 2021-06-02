@@ -1,8 +1,10 @@
 # Raspberry-pi-Bluetooth-MusicBox-using-Buildroot
-Raspberry-pi Bluetooth, WiFi, using Buildroot
+Raspberry-pi Bluetooth, WiFi, MusicBox using Buildroot
 ## Video
  [Link](https://youtu.be/OiDO2pVhzgk)
- 
+## Project Requirements
+![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/Advanced_MP3_Player_0.png)
+![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/Advanced_MP3_Player_1.png)
 ## Music Installation
 - `make menuconfig`  
 - Toolchain --> C library --> glibc
