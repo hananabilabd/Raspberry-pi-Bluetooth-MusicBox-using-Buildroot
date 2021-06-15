@@ -3,7 +3,7 @@ Raspberry-pi Bluetooth, WiFi, MusicBox using Buildroot
 ## Video
  [Link](https://youtu.be/OiDO2pVhzgk)
 ## Project Requirements
-![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/Advanced_MP3_Player_0.png)
+Custom built image on SD-Card using buildroot that contains the following:
 ![](https://github.com/hananabilabd/Raspberry-pi-Bluetooth-MusicBox-using-Buildroot/blob/master/Images/Advanced_MP3_Player_1.png)
 ## Music Installation
 - `make menuconfig`  
